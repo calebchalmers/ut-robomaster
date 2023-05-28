@@ -32,6 +32,7 @@ private:
     src::Drivers* drivers;
     ChassisSubsystem* chassis;
     OdometrySubsystem* odometry;
+    Vector2f target = Vector2f(0.0f);
 };
 }  // namespace navigation
 }  // namespace subsystems
