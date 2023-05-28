@@ -7,6 +7,7 @@
 
 #include "subsystems/chassis/chassis_subsystem.hpp"
 #include "subsystems/chassis/command_move_chassis.hpp"
+#include "subsystems/navigation/navigation_subsystem.hpp"
 #include "subsystems/odometry/odometry_subsystem.hpp"
 #include "subsystems/shooter/command_fire_continuous.hpp"
 #include "subsystems/shooter/command_fire_once.hpp"
@@ -36,6 +37,7 @@ chassis::ChassisSubsystem chassis(drivers());
 turret::TurretSubsystem turret(drivers());
 shooter::ShooterSubsystem shooter(drivers());
 odometry::OdometrySubsystem odometry(drivers(), &chassis, &turret);
+navigation::NavigationSubsystem navigation(drivers(), &chassis, &odometry);
 
 // Commands
 chassis::CommandMoveChassis moveChassisCommand(drivers(), &chassis, &turret);
@@ -55,6 +57,7 @@ void registerStandardSubsystems(src::Drivers *drivers)
     drivers->commandScheduler.registerSubsystem(&turret);
     drivers->commandScheduler.registerSubsystem(&shooter);
     drivers->commandScheduler.registerSubsystem(&odometry);
+    drivers->commandScheduler.registerSubsystem(&navigation);
     shooter.registerSubsystems();
 }
 
@@ -64,11 +67,12 @@ void initializeSubsystems()
     turret.initialize();
     shooter.initialize();
     odometry.initialize();
+    navigation.initialize();
 }
 
 void setDefaultCommands(src::Drivers *)
 {
-    chassis.setDefaultCommand(&moveChassisCommand);
+    // chassis.setDefaultCommand(&moveChassisCommand);
     turret.setDefaultCommand(&moveTurretCommand);
     shooter.setDefaultCommand(&fireContinuousCommand);
 }

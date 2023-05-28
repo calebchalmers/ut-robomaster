@@ -1,3 +1,6 @@
+#ifndef SUBSYSTEMS_ODOMETRY_SUBSYSTEM_HPP_
+#define SUBSYSTEMS_ODOMETRY_SUBSYSTEM_HPP_
+
 #include "tap/algorithms/odometry/chassis_displacement_observer_interface.hpp"
 #include "tap/algorithms/odometry/odometry_2d_interface.hpp"
 #include "tap/algorithms/odometry/odometry_2d_tracker.hpp"
@@ -50,3 +53,5 @@ private:
 };
 }  // namespace odometry
 }  // namespace subsystems
+
+#endif
