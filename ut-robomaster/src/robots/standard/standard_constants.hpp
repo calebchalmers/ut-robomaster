@@ -52,6 +52,7 @@ static constexpr modm::Pair<uint16_t, float> FLYWHEEL_RPS_MAPPING[] = {
 
 static constexpr int FLYWHEELS = 4;
 static constexpr float DEFAULT_SPEED = 70.0f;
+static constexpr float DEFAULT_EXIT_VELOCITY = 15.0f;
 
 // Agitator constants ------------------------------------------------
 constexpr MotorId ID_AGITATOR_L = MOTOR1;
@@ -83,6 +84,11 @@ static constexpr float PITCH_INPUT_SCALE = 0.01f;
 
 static constexpr float MOUSE_SENS_YAW = 0.0002f;
 static constexpr float MOUSE_SENS_PITCH = 0.0002f;
+
+static constexpr float CAMERA_TO_PITCH_OFFSET = 0.13555f;
+static constexpr float NOZZLE_TO_PITCH_OFFSET = 0.18151f;
+static constexpr float CAMERA_TO_BARREL_OFFSET = 0.0427f;
+static constexpr float CAMERA_X_OFFSET = -0.0335f;
 
 static constexpr tap::algorithms::SmoothPidConfig YAW_PID_CONFIG = {
     .kp = 65'000.0f,

@@ -3,6 +3,7 @@
 #include "tap/algorithms/ballistics.hpp"
 
 using namespace tap::algorithms::ballistics;
+using communication::TurretData;
 
 namespace commands
 {
@@ -12,8 +13,16 @@ void CommandMoveTurretAimbot::initialize() {
 }
 
 void CommandMoveTurretAimbot::execute() {
-    if (drivers->beagleboneCommunicator.getTurretData().hasTarget) {
-        float bulletVelocity = 15.0f;
+    TurretData cv = drivers->beagleboneCommunicator.getTurretData();
+    if (cv.hasTarget) {
+        Vector3f targetPosition = Vector3f(
+            cv.xPos + CAMERA_X_OFFSET,
+            cv.zPos + CAMERA_TO_PITCH_OFFSET,
+            cv.yPos + CAMERA_TO_BARREL_OFFSET);
+        Vector3f targetVelocity = Vector3f(cv.xVel, cv.zVel, cv.yVel);
+        Vector3f targetAcceleration = Vector3f(cv.xAcc, cv.zAcc, cv.yAcc);
+        
+        float bulletVelocity = DEFAULT_EXIT_VELOCITY;
 
         // Get bullet velocity if ref system is connected
         if (drivers->refSerial.getRefSerialReceivingData()) {
@@ -30,10 +39,6 @@ void CommandMoveTurretAimbot::execute() {
         float turretPitch = 0.0f;
         float turretYaw = 0.0f;
         float projectedTravelTime = 0.0f;
-
-        Vector3f targetPosition = Vector3f(0.0f);
-        Vector3f targetVelocity = Vector3f(0.0f);
-        Vector3f targetAcceleration = Vector3f(0.0f);
 
         findTargetProjectileIntersection(
             {targetPosition, targetVelocity, targetAcceleration},
