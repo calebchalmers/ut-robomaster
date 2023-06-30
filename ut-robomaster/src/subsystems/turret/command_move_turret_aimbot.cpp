@@ -13,7 +13,18 @@ void CommandMoveTurretAimbot::initialize() {
 
 void CommandMoveTurretAimbot::execute() {
     if (drivers->beagleboneCommunicator.getTurretData().hasTarget) {
-        float bulletVelocity = 1.0f;
+        float bulletVelocity = 15.0f;
+
+        // Get bullet velocity if ref system is connected
+        if (drivers->refSerial.getRefSerialReceivingData()) {
+            #if defined(TARGET_STANDARD) || defined(TARGET_SENTRY)
+                bulletVelocity = drivers->refSerial.getRobotData().turret.barrelSpeedLimit17ID1;
+
+            #elif defined(TARGET_HERO)
+                bulletVelocity = drivers->refSerial.getRobotData().turret.barrelSpeedLimit42;
+            #endif
+        }
+
         uint8_t numBallisticIterations = 1;
 
         float turretPitch = 0.0f;
