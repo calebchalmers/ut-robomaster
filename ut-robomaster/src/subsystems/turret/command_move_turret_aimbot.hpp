@@ -42,6 +42,6 @@ private:
 
     uint32_t lastTurretDataIndex = 0;
 
-    const bool USE_BALLISTICS = true;
+    const bool USE_BALLISTICS = false;
 };
 }  // namespace commands

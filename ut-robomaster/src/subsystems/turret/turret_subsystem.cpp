@@ -44,10 +44,6 @@ float TurretSubsystem::getTargetWorldYaw() { return targetWorldYaw; }
 
 float TurretSubsystem::getTargetWorldPitch() { return targetWorldPitch; }
 
-float TurretSubsystem::getTargetWorldYaw() { return targetWorldYaw; }
-
-float TurretSubsystem::getTargetWorldPitch() { return targetWorldPitch; }
-
 float TurretSubsystem::getCurrentLocalYaw()
 {
     return !isCalibrated ? 0.0f : yawTurret.getAngle() / YAW_REDUCTION - baseYaw;
