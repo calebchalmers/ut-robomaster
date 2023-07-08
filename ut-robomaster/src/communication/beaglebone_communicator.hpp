@@ -65,6 +65,11 @@ public:
      */
     const TurretData& getTurretData() const;
 
+    /**
+     * @return the index of the last turret aiming data packet received from the BeagleBone
+     */
+    uint32_t getTurretDataIndex() const;
+
 private:
     src::Drivers* drivers;
 
@@ -82,5 +87,8 @@ private:
 
     /** Timer to track elapsed time since last message received */
     tap::arch::MilliTimeout beagleboneOfflineTimeout;
+
+    /** Identifier for the last turret data packet received, so we can check for new data */
+    uint32_t turretDataIndex = 0;
 };
 }   // namespace communication

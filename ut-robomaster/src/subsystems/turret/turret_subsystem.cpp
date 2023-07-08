@@ -29,7 +29,7 @@ void TurretSubsystem::initialize() {
 
 void TurretSubsystem::inputManualAngles(float yaw, float pitch) {
     inputYaw = yaw;
-    inputPitch = pitch;
+    inputPitch = modm::min(modm::max(pitch, PITCH_MIN), PITCH_MAX);
 }
 
 float TurretSubsystem::getChassisYaw() { return modm::toRadian(drivers->bmi088.getYaw() - 180.0f); }
@@ -37,6 +37,10 @@ float TurretSubsystem::getChassisYaw() { return modm::toRadian(drivers->bmi088.g
 float TurretSubsystem::getTargetLocalYaw() { return targetWorldYaw - getChassisYaw(); }
 
 float TurretSubsystem::getTargetLocalPitch() { return targetWorldPitch; }
+
+float TurretSubsystem::getTargetWorldYaw() { return targetWorldYaw; }
+
+float TurretSubsystem::getTargetWorldPitch() { return targetWorldPitch; }
 
 float TurretSubsystem::getCurrentLocalYaw() {
     return !isCalibrated ? 0.0f : yawTurret.getAngle() / BELT_RATIO - baseYaw;

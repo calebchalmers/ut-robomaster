@@ -42,6 +42,10 @@ public:
 
     float getTargetLocalPitch();
 
+    float getTargetWorldYaw();
+
+    float getTargetWorldPitch();
+
     float getCurrentLocalYaw();
 
     float getCurrentLocalPitch();

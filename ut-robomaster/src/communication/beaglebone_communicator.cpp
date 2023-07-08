@@ -49,34 +49,12 @@ void BeagleBoneCommunicator::sendOdometryData() {
 bool BeagleBoneCommunicator::decodeTurretData(const ReceivedSerialMessage& message) {
 
     if (message.header.dataLength == sizeof(lastTurretData)) {
-        memcpy(&lastTurretData, &message.data, sizeof(lastTurretData)); 
-        // if(lastTurretData.hasTarget){
-        //     //setTurret();
-        // }
-        // else{
-        //     //turret->setAimStrategy(subsystems::turret::AimStrategy::Manual);
-        // }
+        memcpy(&lastTurretData, &message.data, sizeof(lastTurretData));
+        turretDataIndex += 1;
         return true;
     }
     return false;
 }
-/*
-void BeagleBoneCommunicator::setTurret(){
-    //take lastTurretData, write to turret reference
-    Vector3f position;
-    position.x = lastTurretData.xPos;
-    position.y = lastTurretData.yPos;
-    position.z = lastTurretData.zPos;
-    Vector3f velocity;
-    velocity.x = lastTurretData.xVel;
-    velocity.y = lastTurretData.yVel;
-    velocity.z = lastTurretData.zVel;
-    Vector3f acceleration;
-    acceleration.x = lastTurretData.xAcc;
-    acceleration.y = lastTurretData.yAcc;
-    acceleration.z = lastTurretData.zAcc;
-    //turret->inputTargetData(position, velocity, acceleration);
-}*/
 
 bool BeagleBoneCommunicator::isBeagleBoneOnline() const {
     return !beagleboneOfflineTimeout.isExpired();
@@ -85,4 +63,7 @@ bool BeagleBoneCommunicator::isBeagleBoneOnline() const {
 const TurretData& BeagleBoneCommunicator::getTurretData() const {
     return lastTurretData;
 }
+
+uint32_t BeagleBoneCommunicator::getTurretDataIndex() const { return turretDataIndex; }
+
 }   // namespace communication

@@ -39,5 +39,9 @@ private:
 
     float yaw = 0.0f;
     float pitch = 0.0f;
+
+    uint32_t lastTurretDataIndex = 0;
+
+    const bool USE_BALLISTICS = true;
 };
 }  // namespace commands
