@@ -1,45 +1,17 @@
 #include "command_move_turret_joystick.hpp"
 
-#define ANALOG_DEAD_ZONE 0.1
-
 namespace commands
 {
-void CommandMoveTurretJoystick::initialize()
-{
-    yaw = turret->getInputYaw();
-    pitch = turret->getInputPitch();
-}
+void CommandMoveTurretJoystick::initialize() {}
 
 void CommandMoveTurretJoystick::execute()
 {
-    Remote* remote = &drivers->remote;
+    Remote* remote = &drivers->remote;  // interface for the robot's controller
 
-    if (drivers->isKillSwitched())
-    {
-        yaw = turret->getCurrentLocalYaw() + turret->getChassisYaw();
-        pitch = turret->getCurrentLocalPitch();
-    }
+    float h = remote->getChannel(Remote::Channel::LEFT_HORIZONTAL);  // joystick horizontal [-1, 1]
+    float v = remote->getChannel(Remote::Channel::LEFT_VERTICAL);    // joystick vertical [-1, 1]
 
-    else
-    {
-        float yawInput = 0.0f;
-        float pitchInput = 0.0f;
-
-        float h = remote->getChannel(Remote::Channel::LEFT_HORIZONTAL);
-        float v = remote->getChannel(Remote::Channel::LEFT_VERTICAL);
-
-        if (abs(h) < ANALOG_DEAD_ZONE) h = 0.0f;
-        if (abs(v) < ANALOG_DEAD_ZONE) v = 0.0f;
-
-        yawInput = h * abs(h);    // quadratic input map
-        pitchInput = v * abs(v);  // quadratic input map
-
-        yaw -= yawInput * YAW_INPUT_SCALE * 0.15f;
-        pitch += pitchInput * PITCH_INPUT_SCALE * 0.25f;
-        pitch = modm::min(modm::max(pitch, PITCH_MIN), PITCH_MAX);
-    }
-
-    turret->inputManualAngles(yaw, pitch);
+    turret->inputManualAngles(0, 0);  // angles here are in radians and are absolute
 }
 
 void CommandMoveTurretJoystick::end(bool) {}

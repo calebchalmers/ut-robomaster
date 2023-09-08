@@ -3,6 +3,7 @@
 #include "tap/communication/serial/remote.hpp"
 #include "tap/control/command.hpp"
 
+#include "modm/math.hpp"
 #include "robots/robot_constants.hpp"
 #include "subsystems/turret/turret_subsystem.hpp"
 
@@ -36,8 +37,5 @@ public:
 private:
     src::Drivers* drivers;
     TurretSubsystem* turret;
-
-    float yaw = 0.0f;
-    float pitch = 0.0f;
 };
 }  // namespace commands
