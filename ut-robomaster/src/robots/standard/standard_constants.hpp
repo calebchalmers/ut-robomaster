@@ -57,7 +57,7 @@ constexpr MotorId ID_AGITATOR_R = MOTOR2;
 
 constexpr PidConstants PID_AGITATOR = PID_VELOCITY_DEFAULT;
 
-const float BALLS_PER_SEC = 10.0f;
+const float BALLS_PER_SEC = 2.0f;
 const float BALLS_PER_REV = 8.0f;
 
 const uint16_t BARREL_HEAT_BUFFER = 20.0f;

@@ -4,7 +4,8 @@
 
 namespace commands
 {
-void CommandMoveTurretJoystick::initialize() {
+void CommandMoveTurretJoystick::initialize()
+{
     yaw = turret->getInputYaw();
     pitch = turret->getInputPitch();
 }
@@ -13,12 +14,14 @@ void CommandMoveTurretJoystick::execute()
 {
     Remote* remote = &drivers->remote;
 
-    if (drivers->isKillSwitched()) {
+    if (drivers->isKillSwitched())
+    {
         yaw = turret->getCurrentLocalYaw() + turret->getChassisYaw();
         pitch = turret->getCurrentLocalPitch();
     }
-    
-    else {
+
+    else
+    {
         float yawInput = 0.0f;
         float pitchInput = 0.0f;
 
@@ -31,8 +34,8 @@ void CommandMoveTurretJoystick::execute()
         yawInput = h * abs(h);    // quadratic input map
         pitchInput = v * abs(v);  // quadratic input map
 
-        yaw -= yawInput * YAW_INPUT_SCALE;
-        pitch += pitchInput * PITCH_INPUT_SCALE;
+        yaw -= yawInput * YAW_INPUT_SCALE * 0.15f;
+        pitch += pitchInput * PITCH_INPUT_SCALE * 0.25f;
         pitch = modm::min(modm::max(pitch, PITCH_MIN), PITCH_MAX);
     }
 
