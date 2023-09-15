@@ -3,7 +3,6 @@
 #include "tap/communication/serial/remote.hpp"
 #include "tap/control/command.hpp"
 
-#include "modm/math.hpp"
 #include "robots/robot_constants.hpp"
 #include "subsystems/turret/turret_subsystem.hpp"
 
