@@ -42,7 +42,7 @@ float TurretSubsystem::getTargetLocalPitch() { return targetWorldPitch; }
 
 float TurretSubsystem::getCurrentLocalYaw()
 {
-    return !isCalibrated ? 0.0f : yawTurret.getAngle() / YAW_REDUCTION - baseYaw;
+    return !isCalibrated ? 1.0f : yawTurret.getAngle() / YAW_REDUCTION - baseYaw;
 }
 
 float TurretSubsystem::getCurrentLocalPitch()
