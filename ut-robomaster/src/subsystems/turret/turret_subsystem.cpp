@@ -21,8 +21,7 @@ TurretSubsystem::TurretSubsystem(src::Drivers* drivers)
 {
 }
 
-void TurretSubsystem::initialize()
-{
+void TurretSubsystem::initialize() {
     yawTurret.initialize();
     pitchTurret.initialize();
     lastTime = tap::arch::clock::getTimeMilliseconds();
@@ -31,8 +30,7 @@ void TurretSubsystem::initialize()
 void TurretSubsystem::inputManualAngles(float yaw, float pitch)
 {
     inputYaw = yaw;
-    inputPitch = pitch;
-}
+    inputPitch = pitch; }
 
 float TurretSubsystem::getChassisYaw() { return modm::toRadian(drivers->bmi088.getYaw() - 180.0f); }
 
@@ -42,7 +40,7 @@ float TurretSubsystem::getTargetLocalPitch() { return targetWorldPitch; }
 
 float TurretSubsystem::getCurrentLocalYaw()
 {
-    return !isCalibrated ? 0.0f : yawTurret.getAngle() / YAW_REDUCTION - baseYaw;
+    return !isCalibrated ? 1.0f : yawTurret.getAngle() / YAW_REDUCTION - baseYaw;
 }
 
 float TurretSubsystem::getCurrentLocalPitch()
