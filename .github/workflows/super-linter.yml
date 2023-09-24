@@ -25,6 +25,6 @@ jobs:
         uses: github/super-linter@v4
         env:
           VALIDATE_CPP: false
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: "develop"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
