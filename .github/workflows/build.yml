@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - uses: actions/checkout@v3
-    # - name: Build the container
-    #   run: podman build --tag "ut-robomaster" .
-    # - name: Run the container
-    #   run: podman run -dt --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ut-robomaster
+    - uses: actions/checkout@v3
+    - name: Build the container
+      run: docker build --tag "ut-robomaster" .
+    - name: Run the container
+      run: docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
     # - run: echo $(pwd)
-    # - run: podman exec -l ls -la
-    - run: podman --version
-    # - name: Build Standard
-      # run: podman exec -l scons build robot=standard
+    - run: docker exec me ls -la
+    - run: docker --version
+    - name: Build Standard
+      run: docker exec me scons build robot=standard
       
