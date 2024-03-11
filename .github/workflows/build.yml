@@ -17,7 +17,7 @@ jobs:
     - name: Build the container
       run: podman build --tag "ut-robomaster" .
     - name: Run the container
-      run: podman run -dt --rm --userns=keep-id -v .:/code -w /code/ut-robomaster ut-robomaster
+      run: podman run -dt --rm --userns=keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ut-robomaster
     - run: echo $(pwd)
     - run: podman exec -l ls -la
     - name: Build Standard
