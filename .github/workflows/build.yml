@@ -13,16 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: ls -lan
-    # - uses: actions/checkout@v3
-    # - name: Build the container
-    #   run: sudo docker build --tag ut-robomaster --file Containerfile .
-    # - name: Run the container
-    #   run: sudo docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
-    # - run: echo $(pwd)
-    # - run: sudo docker exec --user 1000:1000 me ls -la
-    # - run: sudo docker exec me ls -la
-    # - run: docker --version
-    # - name: Build Standard
-    #   run: docker exec --user 1000:1000 me scons build robot=standard
+    - uses: actions/checkout@v3
+    - run: ls -la
+    - run: podman --version
+    - name: Install Podman
+      uses: gacts/install-podman@v1.1.0
+    - run: podman --version
+    - name: Build the container
+      run: podman build --tag ut-robomaster .
+    - name: Run the container
+      run: podman run -dt --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ut-robomaster
+    - run: podman exec -l ls -la
+    - name: Build Standard
+      run: podman exec -l scons build robot=standard
       
