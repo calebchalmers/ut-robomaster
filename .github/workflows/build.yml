@@ -16,12 +16,12 @@ jobs:
     - uses: actions/checkout@v4
     - uses: gacts/install-podman@v1.1.0
     - run: alias docker=podman
-    - uses: whoan/docker-build-with-cache-action@v8.0.2
+    - name: Cache images
+      uses: ScribeMD/docker-cache@0.3.7
       with:
-        push_image_and_stages: false
-        image_tag: "ut-robomaster"
-    # - name: Build the container
-      # run: podman build --tag ut-robomaster .
+        key: container-${{ runner.os }}-${{ hashFiles('Containerfile') }}
+    - name: Build the container
+      run: podman build --tag ut-robomaster .
     - name: Run the container
       run: podman run -dt --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ut-robomaster
     - name: Build Standard
