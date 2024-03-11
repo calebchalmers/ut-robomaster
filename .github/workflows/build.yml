@@ -19,8 +19,9 @@ jobs:
     - name: Run the container
       run: docker run -dt --rm --user dev:dev --name me -v .:/code -w /code/ut-robomaster ut-robomaster
     # - run: echo $(pwd)
-    - run: docker exec me ls -la
+    - run: docker exec --user 1000:1000 me ls -la
+    - run: docker exec --user dev:dev me ls -la
     - run: docker --version
     - name: Build Standard
-      run: docker exec me scons build robot=standard
+      run: docker exec --user 1000:1000 me scons build robot=standard
       
