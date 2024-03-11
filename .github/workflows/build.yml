@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: sudo ls -la
-    - uses: actions/checkout@v3
-    - name: Build the container
-      run: sudo docker build --tag ut-robomaster --file Containerfile .
-    - name: Run the container
-      run: sudo docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
-    - run: echo $(pwd)
-    - run: sudo docker exec --user 1000:1000 me ls -la
-    - run: sudo docker exec me ls -la
+    - run: sudo ls -lan
+    # - uses: actions/checkout@v3
+    # - name: Build the container
+    #   run: sudo docker build --tag ut-robomaster --file Containerfile .
+    # - name: Run the container
+    #   run: sudo docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
+    # - run: echo $(pwd)
+    # - run: sudo docker exec --user 1000:1000 me ls -la
+    # - run: sudo docker exec me ls -la
     # - run: docker --version
     # - name: Build Standard
     #   run: docker exec --user 1000:1000 me scons build robot=standard
