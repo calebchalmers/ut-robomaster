@@ -17,7 +17,7 @@ jobs:
     - name: Build the container
       run: docker build --tag ut-robomaster --file Containerfile .
     - name: Run the container
-      run: docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
+      run: docker run -dt --rm --user dev:dev --name me -v .:/code -w /code/ut-robomaster ut-robomaster
     # - run: echo $(pwd)
     - run: docker exec me ls -la
     - run: docker --version
