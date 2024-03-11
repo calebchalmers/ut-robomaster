@@ -18,6 +18,8 @@ jobs:
       run: podman build --tag "ut-robomaster" .
     - name: Run the container
       run: podman run -dt --rm --userns=keep-id -v .:/code -w /code/ut-robomaster ut-robomaster
+    - run: echo $(pwd)
+    - run: podman exec -l ls -la
     - name: Build Standard
       run: podman exec -l scons build robot=standard
       
