@@ -17,5 +17,5 @@ jobs:
     - name: Build the image
       run: podman build --tag "ut-robomaster" .
     - name: scons build standard
-      run: podman run -it -v .:/robomaster -w /robomaster/ut-robomaster ut-robomaster scons build "standard"
+      run: podman run -v .:/robomaster -w /robomaster/ut-robomaster ut-robomaster scons build "standard"
       
