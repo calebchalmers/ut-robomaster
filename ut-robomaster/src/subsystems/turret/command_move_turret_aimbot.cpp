@@ -12,7 +12,7 @@ void CommandMoveTurretAimbot::initialize() {}
 void CommandMoveTurretAimbot::execute()
 {
     // only run if the CV board is online
-    if (!drivers->cvBoard.isOnline()) return;
+    if (!drivers->cvBoard.isOnline()) return;  // all better :)
 
     // only run when there's new data
     if (lastTurretDataIndex == drivers->cvBoard.turretDataIndex) return;
