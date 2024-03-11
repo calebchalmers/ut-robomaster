@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: sudo ls -lan
+    - run: ls -lan
     # - uses: actions/checkout@v3
     # - name: Build the container
     #   run: sudo docker build --tag ut-robomaster --file Containerfile .
