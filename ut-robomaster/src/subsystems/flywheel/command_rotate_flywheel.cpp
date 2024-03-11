@@ -7,8 +7,7 @@ void CommandRotateFlywheel::initialize() {}
 
 void CommandRotateFlywheel::execute()
 {
-    if (drivers->refSerial.getRefSerialReceivingData())
-    {
+    if (drivers->refSerial.getRefSerialReceivingData()) {
 #if defined(TARGET_STANDARD) || defined(TARGET_SENTRY)
         uint16_t refSystemLaunchSpeedLeft =
             drivers->refSerial.getRobotData().turret.barrelSpeedLimit17ID1;
