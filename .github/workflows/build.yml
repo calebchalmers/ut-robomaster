@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the container
-      run: docker build --tag "ut-robomaster" .
+      run: docker build --tag ut-robomaster --file Containerfile .
     - name: Run the container
       run: docker run -dt --rm --name me -v .:/code -w /code/ut-robomaster ut-robomaster
     # - run: echo $(pwd)
