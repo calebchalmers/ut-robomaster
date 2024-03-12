@@ -38,7 +38,6 @@ RUN apt-get update -qq \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
-
 # Setup non-root user
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -s /usr/bin/bash \
