@@ -4,6 +4,8 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
+env:
+  RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,14 +14,12 @@ jobs:
       uses: actions/checkout@v4
     - name: Install Podman
       uses: gacts/install-podman@v1.1.0
-    - name: Build the container
-      run: podman build --tag container .
-    - name: Run the container
-      run: podman run -dt --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster container
+    - name: Pull container
+      run: podman pull ghcr.io/${{ github.repository_owner }}/robomaster
     - name: Build Standard
-      run: podman exec -l scons build robot=standard
+      run: podman run ${{ env.RUN_ARGS }} container scons build robot=standard
     - name: Build Hero
-      run: podman exec -l scons build robot=hero
+      run: podman run ${{ env.RUN_ARGS }} container scons build robot=hero
     - name: Build Sentry
-      run: podman exec -l scons build robot=sentry
+      run: podman run ${{ env.RUN_ARGS }} container scons build robot=sentry
       
