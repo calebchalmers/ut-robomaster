@@ -8,6 +8,9 @@ env:
   RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster"
 jobs:
   build:
+    strategy:
+        matrix:
+          robots: [standard, hero, sentry]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -16,10 +19,6 @@ jobs:
       uses: gacts/install-podman@v1.1.0
     - name: Pull container
       run: podman pull ghcr.io/${{ github.repository_owner }}/robomaster
-    - name: Build Standard
-      run: podman run ${{ env.RUN_ARGS }} container scons build robot=standard
-    - name: Build Hero
-      run: podman run ${{ env.RUN_ARGS }} container scons build robot=hero
-    - name: Build Sentry
-      run: podman run ${{ env.RUN_ARGS }} container scons build robot=sentry
+    - name: Build code
+      run: podman run ${{ env.RUN_ARGS }} robomaster:latest scons build robot=$
       
