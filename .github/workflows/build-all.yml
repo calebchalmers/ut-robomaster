@@ -10,7 +10,8 @@ jobs:
   build:
     strategy:
         matrix:
-          robots: [standard, hero, sentry]
+          robot: [standard, hero, sentry]
+        fail-fast: false
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
