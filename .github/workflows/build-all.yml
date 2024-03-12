@@ -6,7 +6,7 @@ on:
     branches: [ "develop" ]
 env:
   IMAGE_URL: "ghcr.io/${{ github.repository_owner }}/robomaster"
-  RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ${{ env.IMAGE_URL }}"
+  RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster $IMAGE_URL"
 jobs:
   build:
     strategy:
