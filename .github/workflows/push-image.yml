@@ -2,7 +2,7 @@ name: Push dev container to registry
 on:
   push:
     branches: ["develop"]
-    paths: ["./Containerfile"]
+    paths: ["Containerfile"]
   workflow_dispatch:
 env:
   IMAGE_NAME: robomaster
