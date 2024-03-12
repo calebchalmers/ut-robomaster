@@ -48,3 +48,5 @@ USER $USERNAME
 
 # Install tools (user-space)
 RUN pip3 install lbuild pyelftools modm
+
+touch TESTTESTTEST
