@@ -2,6 +2,7 @@ BasedOnStyle: Google
 
 IndentWidth: 4
 
+
 # public, private, protected are 4 spaces to the left of a class indent
 AccessModifierOffset: -4
 
