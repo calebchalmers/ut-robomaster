@@ -5,7 +5,7 @@ on:
     paths: ["Containerfile"]
   workflow_dispatch:
 env:
-  IMAGE_NAME: robomaster
+  IMAGE_NAME: robomaster-firmware
 
 jobs:
   push-container:
