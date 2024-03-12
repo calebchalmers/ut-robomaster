@@ -6,7 +6,7 @@ on:
     branches: [ "develop" ]
 env:
   IMAGE_URL: "ghcr.io/${{ github.repository_owner }}/robomaster"
-  RUN_ARGS: "-t --rm --uidmap 1000:0:1 -v .:/code -w /code/ut-robomaster $IMAGE_URL"
+  RUN_ARGS: "-t --rm --uidmap 1000:0:1 --uidmap 0:1:1000 --uidmap 1001:1001:64536 -v .:/code -w /code/ut-robomaster $IMAGE_URL"
 jobs:
   build:
     strategy:
