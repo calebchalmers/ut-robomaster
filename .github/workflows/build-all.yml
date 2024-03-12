@@ -20,5 +20,5 @@ jobs:
     - name: Pull container
       run: podman pull ghcr.io/${{ github.repository_owner }}/robomaster
     - name: Build code
-      run: podman run ${{ env.RUN_ARGS }} robomaster:latest scons build robot=$
+      run: podman run ${{ env.RUN_ARGS }} robomaster:latest scons build robot=${{ matrix.robot }}
       
