@@ -1,11 +1,12 @@
-name: Test building for each robot
+name: Build All
 on:
   push:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 env:
-  RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster"
+  IMAGE_URL: "ghcr.io/${{ github.repository_owner }}/robomaster"
+  RUN_ARGS: "-t --rm --userns keep-id:uid=1000,gid=1000 -v .:/code -w /code/ut-robomaster ${{ env.IMAGE_URL }}"
 jobs:
   build:
     strategy:
@@ -14,12 +15,10 @@ jobs:
         fail-fast: false
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
     - name: Install Podman
       uses: gacts/install-podman@v1.1.0
-    - name: Pull container
-      run: podman pull ghcr.io/${{ github.repository_owner }}/robomaster
+    - name: Checkout repository
+      uses: actions/checkout@v4
     - name: Build code
-      run: podman run ${{ env.RUN_ARGS }} robomaster:latest scons build robot=${{ matrix.robot }}
+      run: podman run ${{ env.RUN_ARGS }} scons build robot=${{ matrix.robot }}
       
