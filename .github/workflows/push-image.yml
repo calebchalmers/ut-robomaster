@@ -3,6 +3,8 @@
 # are not buggy and we are getting the desired output.
 name: Push to GHCR
 on:
+  pull_request:
+    branches: ["develop"]
   workflow_dispatch:
 env:
     IMAGE_NAME: robomaster
