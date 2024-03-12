@@ -6,7 +6,8 @@ on:
     branches: [ "develop" ]
 env:
   IMAGE_URL: "ghcr.io/${{ github.repository_owner }}/robomaster"
-  RUN_ARGS: "-t --rm --uidmap 1000:0:1 --uidmap 0:1:1000 --uidmap 1001:1001:64536 -v .:/code -w /code/ut-robomaster $IMAGE_URL"
+  UID_MAPS: "--uidmap 1000:0:1 --uidmap 0:1:1000"
+  RUN_ARGS: "-t --rm -v .:/code -w /code/ut-robomaster $UID_MAPS $IMAGE_URL"
 jobs:
   build:
     strategy:
@@ -15,8 +16,6 @@ jobs:
         fail-fast: false
     runs-on: ubuntu-latest
     steps:
-    - run: cat /etc/subuid
-    - run: cat /etc/subgid
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Build code
