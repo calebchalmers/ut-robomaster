@@ -1,10 +1,11 @@
 name: Push dev container to registry
 on:
-  pull_request:
+  push:
     branches: ["develop"]
+    paths: ["./Containerfile"]
   workflow_dispatch:
 env:
-    IMAGE_NAME: robomaster
+  IMAGE_NAME: robomaster
 
 jobs:
   push-container:
@@ -19,7 +20,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: ${{ env.IMAGE_NAME }}
-          tags: v1 ${{ github.sha }}
+          tags: latest ${{ github.sha }}
           containerfiles: |
             ./Containerfile
             
