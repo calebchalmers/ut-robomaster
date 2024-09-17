@@ -1,0 +1,27 @@
+name: Lint C++ files
+
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  cpp-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cpp-linter/cpp-linter-action@v2
+        id: linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          repo-root: 'ut-robomaster/src/'
+          style: file
+          tidy-checks: '-*'
+          files-changed-only: false
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+          format-review: true
+      - name: Evaluate lint errors
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1

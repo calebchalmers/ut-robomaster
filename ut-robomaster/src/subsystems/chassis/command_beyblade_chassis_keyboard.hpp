@@ -8,8 +8,7 @@
 
 #include "drivers.hpp"
 
-namespace commands
-{
+namespace commands{
 using namespace tap::communication::serial;
 using namespace modm;
 using subsystems::chassis::ChassisSubsystem;
